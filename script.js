@@ -1,36 +1,34 @@
-let slideIndex = 1;
+let slideIndex = 0;
+let slideTimer;
 
-// Initialize the slideshow by showing the first slide
-function showSlides(n) {
+function showSlides() {
   let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-
-  if (n > slides.length) slideIndex = 1;
-  if (n < 1) slideIndex = slides.length;
-
   for (let i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
-
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-
+  slideIndex++;
+  if (slideIndex > slides.length) { slideIndex = 1; }
   slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].className += " active";
+  //slideTimer = setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 
-// Move to the next or previous slide
 function plusSlides(n) {
-  showSlides((slideIndex += n));
+  //clearTimeout(slideTimer);
+  slideIndex += n - 1;
+  showSlides();
 }
 
-// Set the current slide based on dot click
 function currentSlide(n) {
-  showSlides((slideIndex = n));
+  //clearTimeout(slideTimer);
+  slideIndex = n - 1;
+  showSlides();
 }
 
-// Initialize the first slide when the page loads
+function validateForm(event) {
+  event.preventDefault();
+  alert("Thank you for contacting us! Your message has been submitted.");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  showSlides(slideIndex);
+  showSlides();
 });
