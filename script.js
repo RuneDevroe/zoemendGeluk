@@ -21,3 +21,25 @@ window.addEventListener('scroll', function() {
 header.addEventListener('mouseenter', function() {
     header.classList.remove('hidden');
 });
+
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let message = document.getElementById("message").value;
+    
+    if (name && email && message) {
+        
+    } else {
+        alert("Please fill out all fields.");
+    }
+});
+
+document.getElementById('contactButton').addEventListener('click', function() {
+    window.location.href = '#contact';
+});
+
+document.getElementById('contactButtonHoning').addEventListener('click', function() {
+    window.location.href = '#contact';
+});
