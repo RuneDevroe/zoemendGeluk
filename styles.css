@@ -223,6 +223,7 @@ footer {
 
 .social-media-list li a {
   color: #fff;
+  
 }
 
 .social-media-list li {
@@ -251,6 +252,7 @@ footer {
   opacity: 0;
   box-shadow: 0 0 0 1px #fff;
   transition: all .2s ease-in-out;
+  pointer-events: none;
 }
 
 
