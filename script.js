@@ -1,45 +1,59 @@
-let lastScrollTop = 0; // Bewaar de vorige scrollpositie
-const header = document.querySelector('header');
+document.addEventListener("DOMContentLoaded", function() {
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
 
-// Functie die de header verbergt of toont bij scrollen
-window.addEventListener('scroll', function() {
-    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if (!header) return; // Voorkomt fout als header niet bestaat
 
-    // Als naar beneden wordt gescrold, verberg de header
-    if (currentScroll > lastScrollTop) {
-        header.classList.add('hidden');
-    } else {
-        // Als naar boven wordt gescrold, toon de header
+    // Functie die de header verbergt of toont bij scrollen
+    window.addEventListener('scroll', function() {
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > lastScrollTop) {
+            header.classList.add('hidden');
+        } else {
+            header.classList.remove('hidden');
+        }
+
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    });
+
+    // Header weer zichtbaar maken bij hover
+    header.addEventListener('mouseenter', function() {
         header.classList.remove('hidden');
+    });
+
+    // Formulier validatie en versturen
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+        contactForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+
+            if (name && email && message) {
+                alert("Bericht verzonden!");
+                // contactForm.submit(); // uncomment als je het echt wilt verzenden
+            } else {
+                alert("Vul alle velden in.");
+            }
+        });
     }
-    
-    // Update de vorige scrollpositie
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-});
 
-// Voeg een hover-effect toe om de header zichtbaar te maken als je tegen de bovenkant van het scherm hovert
-header.addEventListener('mouseenter', function() {
-    header.classList.remove('hidden');
-});
+    // Knoppen koppelen aan contactsectie
+    const contactButton = document.getElementById('contactButton');
+    const contactButtonHoning = document.getElementById('contactButtonHoning');
 
-document.getElementById("contactForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let message = document.getElementById("message").value;
-    
-    if (name && email && message) {
-        
-    } else {
-        alert("Please fill out all fields.");
+    if (contactButton) {
+        contactButton.addEventListener('click', function() {
+            window.location.href = '#contact';
+        });
     }
-});
 
-document.getElementById('contactButton').addEventListener('click', function() {
-    window.location.href = '#contact';
-});
-
-document.getElementById('contactButtonHoning').addEventListener('click', function() {
-    window.location.href = '#contact';
+    if (contactButtonHoning) {
+        contactButtonHoning.addEventListener('click', function() {
+            window.location.href = '#contact';
+        });
+    }
 });
